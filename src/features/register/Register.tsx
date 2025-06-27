@@ -1,5 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import z from 'zod';
 
 const FormSchema = z.object({
@@ -23,6 +25,12 @@ const FormSchema = z.object({
 });
 type FormType = z.infer<typeof FormSchema>;
 
+type APIError = {
+    name: string;
+    cause: string;
+    stack: string;
+};
+
 export default function Register() {
     const {
         register,
@@ -38,15 +46,60 @@ export default function Register() {
         resolver: zodResolver(FormSchema),
     });
 
+    const navigate = useNavigate();
+
+    const mutation = useMutation({
+        mutationKey: ['register'],
+        mutationFn: async (formData: FormType) => {
+            try {
+                console.log(import.meta.env.VITE_API_URL);
+                const result = await fetch(
+                    `${import.meta.env.VITE_API_URL}/user`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                    }
+                );
+
+                if (!result.ok) {
+                    let errorData: APIError;
+                    try {
+                        errorData = await result.json();
+                    } catch (parseError) {
+                        errorData = {
+                            name: 'Server Error',
+                            cause: `Server responded with status: ${result.status}.`,
+                            stack: '',
+                        };
+                    }
+                    throw errorData;
+                }
+
+                return await result.json();
+            } catch (error) {
+                const networkError: APIError = {
+                    name: 'Network Error',
+                    cause: 'Could not connect to the server. Please check your network connection.',
+                    stack: error instanceof Error ? error.stack || '' : '',
+                };
+                throw networkError;
+            }
+        },
+        onError: (error: APIError) => {
+            setError('root', { message: error.cause });
+            console.error(`${error.name}: ${error.cause}`);
+            throw error;
+        },
+        onSuccess: () => {
+            navigate('/login');
+        },
+    });
+
     const onSubmit: SubmitHandler<FormType> = async (data) => {
-        try {
-            // Use React Query here.
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            console.log(data);
-            // Automatically redirect to /login if is success
-        } catch (error) {
-            setError('root', { message: 'Form Error.' });
-        }
+        mutation.mutate(data);
     };
 
     // The data validation should be identical to the one on the server.
@@ -64,7 +117,7 @@ export default function Register() {
                         <h1>Sign Up</h1>
                         <p>To be able to use our services.</p>
 
-                        {errors.root && <p>{errors.root.message}</p>}
+                        {errors.root && <h1>{errors.root.message}</h1>}
 
                         <section>
                             <label htmlFor="username">Username</label>
