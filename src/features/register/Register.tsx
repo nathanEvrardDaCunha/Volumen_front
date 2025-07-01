@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import z from 'zod';
@@ -46,15 +47,20 @@ export default function Register() {
         resolver: zodResolver(FormSchema),
     });
 
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    function onToggleClick() {
+        setIsPasswordVisible((previous) => !previous);
+    }
+
     const navigate = useNavigate();
 
     const mutation = useMutation({
         mutationKey: ['register'],
         mutationFn: async (formData: FormType) => {
             try {
-                console.log(import.meta.env.VITE_API_URL);
                 const result = await fetch(
-                    `${import.meta.env.VITE_API_URL}/user`,
+                    `${import.meta.env.VITE_API_URL}/users/`,
                     {
                         method: 'POST',
                         headers: {
@@ -150,10 +156,13 @@ export default function Register() {
                             <p>Write down your password.</p>
                             <input
                                 {...register('password')}
-                                type="password"
+                                type={isPasswordVisible ? 'text' : 'password'}
                                 name="password"
                                 id="password"
                             />
+                            <button type="button" onClick={onToggleClick}>
+                                {isPasswordVisible ? 'Hide' : 'Show'}
+                            </button>
                             {errors.password && (
                                 <p>{errors.password.message}</p>
                             )}
