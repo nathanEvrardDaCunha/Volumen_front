@@ -3,8 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Register from './features/register/Register';
+import Login from './features/login/Login';
 
 const queryClient = new QueryClient();
+
+// Implement Logout
 
 const router = createBrowserRouter([
     {
@@ -14,6 +17,10 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Register />,
+    },
+    {
+        path: '/login',
+        element: <Login />,
     },
     {
         path: '*',

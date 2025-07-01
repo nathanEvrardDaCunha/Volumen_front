@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import z from 'zod';
 
 const FormSchema = z.object({
-    username: z.string().min(5),
     email: z.string().email(),
     password: z
         .string()
@@ -32,7 +31,13 @@ type APIError = {
     stack: string;
 };
 
-export default function Register() {
+type APIResponse = {
+    status: number;
+    message: string;
+    data: any;
+};
+
+export default function Login() {
     const {
         register,
         handleSubmit,
@@ -40,7 +45,6 @@ export default function Register() {
         formState: { errors, isSubmitting },
     } = useForm<FormType>({
         defaultValues: {
-            username: '',
             email: '',
             password: '',
         },
@@ -56,16 +60,17 @@ export default function Register() {
     const navigate = useNavigate();
 
     const mutation = useMutation({
-        mutationKey: ['register'],
+        mutationKey: ['login'],
         mutationFn: async (formData: FormType) => {
             try {
                 const result = await fetch(
-                    `${import.meta.env.VITE_API_URL}/auth/register`,
+                    `${import.meta.env.VITE_API_URL}/auth/login`,
                     {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
+                        credentials: 'include',
                         body: JSON.stringify(formData),
                     }
                 );
@@ -99,8 +104,19 @@ export default function Register() {
             console.error(`${error.name}: ${error.cause}`);
             throw error;
         },
-        onSuccess: () => {
-            navigate('/login');
+        onSuccess: (response: APIResponse) => {
+            if (response && response.data && response.data['accessToken']) {
+                localStorage.setItem(
+                    'accessToken',
+                    response.data['accessToken']
+                );
+                navigate('/dashboard/home');
+            } else {
+                console.error(
+                    'Login successful, but accessToken not found in the response.',
+                    response
+                );
+            }
         },
     });
 
@@ -118,24 +134,10 @@ export default function Register() {
             <section>
                 <main>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <h1>Sign Up</h1>
+                        <h1>Sign In</h1>
                         <p>To be able to use our services.</p>
 
                         {errors.root && <h1>{errors.root.message}</h1>}
-
-                        <section>
-                            <label htmlFor="username">Username</label>
-                            <p>Write down your username.</p>
-                            <input
-                                {...register('username')}
-                                type="text"
-                                name="username"
-                                id="username"
-                            />
-                            {errors.username && (
-                                <p>{errors.username.message}</p>
-                            )}
-                        </section>
 
                         <section>
                             <label htmlFor="email">Email</label>
