@@ -28,6 +28,7 @@ type FormType = z.infer<typeof FormSchema>;
 type APIError = {
     name: string;
     cause: string;
+    hint: string;
     stack: string;
 };
 
@@ -70,7 +71,7 @@ export default function Login() {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        credentials: 'include',
+                        credentials: 'include', //Necessary ?
                         body: JSON.stringify(formData),
                     }
                 );
@@ -83,6 +84,7 @@ export default function Login() {
                         errorData = {
                             name: 'Server Error',
                             cause: `Server responded with status: ${result.status}.`,
+                            hint: '',
                             stack: '',
                         };
                     }
@@ -91,12 +93,23 @@ export default function Login() {
 
                 return await result.json();
             } catch (error) {
-                const networkError: APIError = {
-                    name: 'Network Error',
-                    cause: 'Could not connect to the server. Please check your network connection.',
-                    stack: error instanceof Error ? error.stack || '' : '',
-                };
-                throw networkError;
+                console.log(error);
+                if (
+                    error &&
+                    typeof error === 'object' &&
+                    'name' in error &&
+                    'cause' in error
+                ) {
+                    throw error as APIError;
+                } else {
+                    const networkError: APIError = {
+                        name: 'Network Error',
+                        cause: 'Could not connect to the server.',
+                        hint: 'Try checking your network connection.',
+                        stack: error instanceof Error ? error.stack || '' : '',
+                    };
+                    throw networkError;
+                }
             }
         },
         onError: (error: APIError) => {
@@ -137,7 +150,12 @@ export default function Login() {
                         <h1>Sign In</h1>
                         <p>To be able to use our services.</p>
 
-                        {errors.root && <h1>{errors.root.message}</h1>}
+                        {errors.root && (
+                            // Put everything in the 'message' then deconstruct it to have distinct 'hint', 'cause' and 'name' ?
+                            <>
+                                <h1>{errors.root.message}</h1>
+                            </>
+                        )}
 
                         <section>
                             <label htmlFor="email">Email</label>
