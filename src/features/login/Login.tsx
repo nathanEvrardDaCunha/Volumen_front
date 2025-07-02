@@ -32,6 +32,7 @@ type APIError = {
     stack: string;
 };
 
+// data should be unknown
 type APIResponse = {
     status: number;
     message: string;
