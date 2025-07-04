@@ -11,10 +11,14 @@ export const UserSchema = z.object({
 });
 
 const APIResponseSchema = z.object({
-    status: z.number(),
+    success: z.boolean(),
+    name: z.string(),
     message: z.string(),
+    httpCode: z.number(),
     data: UserSchema,
 });
+
+type APIResponse = z.infer<typeof APIResponseSchema>;
 
 type APIError = {
     name: string;
@@ -22,8 +26,6 @@ type APIError = {
     hint: string;
     stack: string;
 };
-
-type APIResponse = z.infer<typeof APIResponseSchema>;
 
 const FIVE_MINUTES_IN_MILLISECONDS = 5 * 60 * 1000;
 

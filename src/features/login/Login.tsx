@@ -25,18 +25,23 @@ const FormSchema = z.object({
 });
 type FormType = z.infer<typeof FormSchema>;
 
+const APIResponseSchema = z.object({
+    success: z.boolean(),
+    name: z.string(),
+    message: z.string(),
+    httpCode: z.number(),
+    data: z.object({
+        accessToken: z.string().min(1),
+    }),
+});
+
+type APIResponse = z.infer<typeof APIResponseSchema>;
+
 type APIError = {
     name: string;
     cause: string;
     hint: string;
     stack: string;
-};
-
-// data should be unknown
-type APIResponse = {
-    status: number;
-    message: string;
-    data: any;
 };
 
 export default function Login() {
@@ -92,7 +97,10 @@ export default function Login() {
                     throw errorData;
                 }
 
-                return await result.json();
+                const jsonResponse = await result.json();
+
+                const validatedData = APIResponseSchema.parse(jsonResponse);
+                return validatedData;
             } catch (error) {
                 console.log(error);
                 if (

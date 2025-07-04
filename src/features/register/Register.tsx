@@ -26,6 +26,17 @@ const FormSchema = z.object({
 });
 type FormType = z.infer<typeof FormSchema>;
 
+const APIResponseSchema = z.object({
+    success: z.boolean(),
+    name: z.string(),
+    message: z.string(),
+    httpCode: z.number(),
+    data: z.object({}),
+});
+
+// Useless type ?
+// type APIResponse = z.infer<typeof APIResponseSchema>;
+
 type APIError = {
     name: string;
     cause: string;
@@ -86,7 +97,10 @@ export default function Register() {
                     throw errorData;
                 }
 
-                return await result.json();
+                const jsonResponse = await result.json();
+
+                const validatedData = APIResponseSchema.parse(jsonResponse);
+                return validatedData;
             } catch (error) {
                 console.log(error);
                 if (
