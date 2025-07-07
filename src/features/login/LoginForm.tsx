@@ -32,7 +32,7 @@ interface LoginFormProps {
     isSubmitting: boolean;
 }
 
-export function LoginForm({
+export default function LoginForm({
     handleSubmit,
     onSubmit,
     errors,

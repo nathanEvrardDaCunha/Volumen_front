@@ -37,7 +37,7 @@ interface RegisterFormProps {
     isSubmitting: boolean;
 }
 
-export function RegisterForm({
+export default function RegisterForm({
     handleSubmit,
     onSubmit,
     errors,

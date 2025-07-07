@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
+import Header from '../layouts/Header';
+import Footer from '../layouts/Footer';
 
 export default function NotFound() {
     return (
         <>
-            <header>
-                <h3>Header</h3>
-            </header>
+            <Header />
 
             <section>
                 <main>
@@ -21,9 +21,7 @@ export default function NotFound() {
                 </main>
             </section>
 
-            <footer>
-                <h3>Footer</h3>
-            </footer>
+            <Footer />
         </>
     );
 }

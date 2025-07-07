@@ -5,7 +5,7 @@ import {
 } from './dashboard-schema';
 import { fetchWithAuth } from '../../utils/auth-fetch';
 
-export async function fetchUserAPI() {
+export default async function fetchUserAPI() {
     try {
         const result = await fetchWithAuth(
             `${import.meta.env.VITE_API_URL}/users/`,

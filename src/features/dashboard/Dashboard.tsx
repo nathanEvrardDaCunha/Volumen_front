@@ -1,14 +1,14 @@
-import { DashboardDisplay } from './DashboardDisplay';
-import { useFetchUser } from './useFetchUser';
+import Footer from '../../layouts/Footer';
+import Header from '../../layouts/Header';
+import DashboardDisplay from './DashboardDisplay';
+import useFetchUser from './useFetchUser';
 
 export default function Dashboard() {
     const query = useFetchUser();
 
     return (
         <>
-            <header>
-                <h3>User Dashboard</h3>
-            </header>
+            <Header />
 
             <section>
                 <main>
@@ -16,9 +16,7 @@ export default function Dashboard() {
                 </main>
             </section>
 
-            <footer>
-                <h3>© 2025 Volumen. All rights reserved.</h3>
-            </footer>
+            <Footer />
         </>
     );
 }

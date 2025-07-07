@@ -1,7 +1,7 @@
 import type { LoginFormType } from '../login/login-schema';
 import { RegisterResponseSchema, type RegisterError } from './register-schema';
 
-export async function registerUserAPI(formData: LoginFormType) {
+export default async function registerUserAPI(formData: LoginFormType) {
     try {
         const result = await fetch(
             `${import.meta.env.VITE_API_URL}/auth/register`,

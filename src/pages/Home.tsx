@@ -1,9 +1,10 @@
+import Footer from '../layouts/Footer';
+import Header from '../layouts/Header';
+
 export default function Home() {
     return (
         <>
-            <header>
-                <h3>Header</h3>
-            </header>
+            <Header />
 
             <section>
                 <main>
@@ -11,9 +12,7 @@ export default function Home() {
                 </main>
             </section>
 
-            <footer>
-                <h3>Footer</h3>
-            </footer>
+            <Footer />
         </>
     );
 }

@@ -1,25 +1,24 @@
+import { fetchWithAuth } from '../../utils/auth-fetch';
 import {
-    LoginResponseSchema,
-    type LoginError,
-    type LoginFormType,
-} from './login-schema';
+    LogoutUserResponseSchema,
+    type LogoutUserError,
+} from './logout-schema';
 
-export default async function loginUserAPI(formData: LoginFormType) {
+export default async function logoutUserAPI() {
     try {
-        const result = await fetch(
-            `${import.meta.env.VITE_API_URL}/auth/login`,
+        const result = await fetchWithAuth(
+            `${import.meta.env.VITE_API_URL}/users/logout`,
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', //Necessary ?
-                body: JSON.stringify(formData),
+                credentials: 'include',
             }
         );
 
         if (!result.ok) {
-            let errorData: LoginError;
+            let errorData: LogoutUserError;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -35,7 +34,7 @@ export default async function loginUserAPI(formData: LoginFormType) {
 
         const jsonResponse = await result.json();
 
-        const validatedData = LoginResponseSchema.parse(jsonResponse);
+        const validatedData = LogoutUserResponseSchema.parse(jsonResponse);
         return validatedData;
     } catch (error) {
         if (
@@ -44,9 +43,9 @@ export default async function loginUserAPI(formData: LoginFormType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as LoginError;
+            throw error as LogoutUserError;
         } else {
-            const networkError: LoginError = {
+            const networkError: LogoutUserError = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

@@ -20,7 +20,7 @@ interface DashboardDisplayProps {
     >;
 }
 
-export function DashboardDisplay({ query }: DashboardDisplayProps) {
+export default function DashboardDisplay({ query }: DashboardDisplayProps) {
     return (
         <>
             {query.isLoading && (

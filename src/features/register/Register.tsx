@@ -1,8 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { RegisterFormSchema, type RegisterFormType } from './register-schema';
-import { useRegister } from './useRegister';
-import { RegisterForm } from './RegisterForm';
+import Header from '../../layouts/Header';
+import Footer from '../../layouts/Footer';
+import RegisterForm from './RegisterForm';
+import useRegister from './useRegister';
 
 export default function Register() {
     const {
@@ -28,9 +30,7 @@ export default function Register() {
     // The data validation should be identical to the one on the server.
     return (
         <>
-            <header>
-                <h3>Header</h3>
-            </header>
+            <Header />
 
             <section>
                 <main>
@@ -44,9 +44,7 @@ export default function Register() {
                 </main>
             </section>
 
-            <footer>
-                <h3>Footer</h3>
-            </footer>
+            <Footer />
         </>
     );
 }

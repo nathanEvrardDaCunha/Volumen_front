@@ -1,8 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { LoginFormSchema, type LoginFormType } from './login-schema';
-import { useLogin } from './useLogin';
-import { LoginForm } from './LoginForm';
+import Header from '../../layouts/Header';
+import Footer from '../../layouts/Footer';
+import LoginForm from './LoginForm';
+import useLogin from './useLogin';
 
 export default function Login() {
     const {
@@ -26,9 +28,7 @@ export default function Login() {
 
     return (
         <>
-            <header>
-                <h3>Header</h3>
-            </header>
+            <Header />
 
             <section>
                 <main>
@@ -42,9 +42,7 @@ export default function Login() {
                 </main>
             </section>
 
-            <footer>
-                <h3>Footer</h3>
-            </footer>
+            <Footer />
         </>
     );
 }

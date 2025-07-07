@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { loginUserAPI } from './login-api';
 import type { LoginError, LoginResponse } from './login-schema';
 import { useNavigate } from 'react-router-dom';
 import type { UseFormSetError } from 'react-hook-form';
+import loginUserAPI from './login-api';
 
 interface UseLoginProps {
     setError: UseFormSetError<{
@@ -11,7 +11,7 @@ interface UseLoginProps {
     }>;
 }
 
-export function useLogin({ setError }: UseLoginProps) {
+export default function useLogin({ setError }: UseLoginProps) {
     const navigate = useNavigate();
 
     const mutation = useMutation({

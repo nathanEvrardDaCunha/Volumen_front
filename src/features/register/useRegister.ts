@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import type { UseFormSetError } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { registerUserAPI } from './register-api';
 import type { RegisterError } from './register-schema';
+import registerUserAPI from './register-api';
 
 interface UseRegisterProps {
     setError: UseFormSetError<{
@@ -11,7 +11,7 @@ interface UseRegisterProps {
     }>;
 }
 
-export function useRegister({ setError }: UseRegisterProps) {
+export default function useRegister({ setError }: UseRegisterProps) {
     const navigate = useNavigate();
 
     const mutation = useMutation({
