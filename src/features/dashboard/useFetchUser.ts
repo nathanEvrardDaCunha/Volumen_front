@@ -1,26 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import type { FetchUserError, FetchUserResponse } from './dashboard-schema';
 import { fetchUserAPI } from './dashboard-api';
-import { useEffect, useState } from 'react';
 
-const FIVE_MINUTES_IN_MILLISECONDS = 5 * 60 * 1000;
+const FIVE_MINUTES_IN_MILLISECONDS = 1 * 60 * 1000;
 
 export function useFetchUser() {
-    const [accessToken, setAccessToken] = useState<string>('');
-
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-            setAccessToken(token);
-        }
-    }, []);
-
     const query = useQuery<FetchUserResponse, FetchUserError>({
-        queryKey: ['fetchUser', accessToken],
+        queryKey: ['fetchUser'],
         queryFn: async () => {
-            return fetchUserAPI(accessToken);
+            return fetchUserAPI();
         },
-        enabled: Boolean(accessToken),
+        enabled: !!localStorage.getItem('accessToken'),
         refetchInterval: FIVE_MINUTES_IN_MILLISECONDS,
     });
 

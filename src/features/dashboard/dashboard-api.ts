@@ -3,17 +3,17 @@ import {
     FetchUserResponseSchema,
     type FetchUserError,
 } from './dashboard-schema';
+import { fetchWithAuth } from '../../utils/auth-fetch';
 
-export async function fetchUserAPI(accessToken: string) {
+export async function fetchUserAPI() {
     try {
-        const result = await fetch(`${import.meta.env.VITE_API_URL}/users/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-            },
-            credentials: 'include',
-        });
+        const result = await fetchWithAuth(
+            `${import.meta.env.VITE_API_URL}/users/`,
+            {
+                method: 'GET',
+                credentials: 'include',
+            }
+        );
 
         if (!result.ok) {
             let errorData: FetchUserError;
