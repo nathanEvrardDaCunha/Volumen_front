@@ -1,24 +1,22 @@
+import { fetchWithAuth } from '../../utils/auth-fetch';
 import {
-    RegisterResponseSchema,
-    type RegisterError,
-    type RegisterFormType,
-} from './register-schema';
+    UpdateUserResponseSchema,
+    type UpdateUserError,
+    type UpdateUserFormType,
+} from './update-user-schema';
 
-export default async function registerUserAPI(formData: RegisterFormType) {
+export default async function updateUserAPI(formData: UpdateUserFormType) {
     try {
-        const result = await fetch(
-            `${import.meta.env.VITE_API_URL}/auth/register`,
+        const result = await fetchWithAuth(
+            `${import.meta.env.VITE_API_URL}/users/`,
             {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                method: 'PATCH',
                 body: JSON.stringify(formData),
             }
         );
 
         if (!result.ok) {
-            let errorData: RegisterError;
+            let errorData: UpdateUserError;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -34,7 +32,7 @@ export default async function registerUserAPI(formData: RegisterFormType) {
 
         const jsonResponse = await result.json();
 
-        const validatedData = RegisterResponseSchema.parse(jsonResponse);
+        const validatedData = UpdateUserResponseSchema.parse(jsonResponse);
         return validatedData;
     } catch (error) {
         if (
@@ -43,9 +41,9 @@ export default async function registerUserAPI(formData: RegisterFormType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as RegisterError;
+            throw error as UpdateUserError;
         } else {
-            const networkError: RegisterError = {
+            const networkError: UpdateUserError = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Footer from '../../layouts/Footer';
 import Header from '../../layouts/Header';
 import DashboardDisplay from './DashboardDisplay';
@@ -12,6 +13,10 @@ export default function Dashboard() {
 
             <section>
                 <main>
+                    <Link to={'/dashboard/update-user'}>
+                        <button type="button">Update Profile</button>
+                    </Link>
+
                     <DashboardDisplay query={query} />
                 </main>
             </section>

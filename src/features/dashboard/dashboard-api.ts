@@ -5,13 +5,14 @@ import {
 } from './dashboard-schema';
 import { fetchWithAuth } from '../../utils/auth-fetch';
 
+// Should I add the Zod Error Handler logic to the other api-features ?
+
 export default async function fetchUserAPI() {
     try {
         const result = await fetchWithAuth(
             `${import.meta.env.VITE_API_URL}/users/`,
             {
                 method: 'GET',
-                credentials: 'include',
             }
         );
 

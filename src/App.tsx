@@ -5,12 +5,11 @@ import NotFound from './pages/NotFound';
 import Register from './features/register/Register';
 import Login from './features/login/Login';
 import Dashboard from './features/dashboard/Dashboard';
+import UpdateUser from './features/update-user/UpdateUser';
 
 const queryClient = new QueryClient();
 
 // In HEADER, add button to navigate to /login, /register, /logout, /dashboard...
-
-// Implement Logout
 
 // Protect Dashboard with authentication on the client side too
 
@@ -32,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: '/dashboard/home',
         element: <Dashboard />,
+    },
+    {
+        path: '/dashboard/update-user',
+        element: <UpdateUser />,
     },
     {
         path: '*',
