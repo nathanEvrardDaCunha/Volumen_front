@@ -8,6 +8,8 @@ import Dashboard from './features/dashboard/Dashboard';
 
 const queryClient = new QueryClient();
 
+// In HEADER, add button to navigate to /login, /register, /logout, /dashboard...
+
 // Implement Logout
 
 // Protect Dashboard with authentication on the client side too
