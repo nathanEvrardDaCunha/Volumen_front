@@ -6,6 +6,7 @@ import Register from './features/register/Register';
 import Login from './features/login/Login';
 import Dashboard from './features/dashboard/Dashboard';
 import UpdateUser from './features/update-user/UpdateUser';
+import ResetPassword from './features/reset-password/ResetPassword';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     {
         path: '/login',
         element: <Login />,
+    },
+    {
+        path: '/reset-password',
+        element: <ResetPassword />,
     },
     {
         path: '/dashboard/home',

@@ -7,7 +7,7 @@ export default function useDeleteUser() {
     const navigate = useNavigate();
 
     const mutation = useMutation({
-        mutationKey: ['updateUser'],
+        mutationKey: ['deleteUser'],
         mutationFn: deleteUserAPI,
         onError: (error: DeleteUserError) => {
             // Replace by a modal ?
