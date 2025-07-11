@@ -3,6 +3,7 @@ import Footer from '../../layouts/Footer';
 import Header from '../../layouts/Header';
 import DashboardDisplay from './DashboardDisplay';
 import useFetchUser from './useFetchUser';
+import DeleteUser from '../delete-user/DeleteUser';
 
 export default function Dashboard() {
     const query = useFetchUser();
@@ -16,6 +17,8 @@ export default function Dashboard() {
                     <Link to={'/dashboard/update-user'}>
                         <button type="button">Update Profile</button>
                     </Link>
+
+                    <DeleteUser />
 
                     <DashboardDisplay query={query} />
                 </main>
