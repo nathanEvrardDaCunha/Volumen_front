@@ -4,6 +4,7 @@ import Header from '../../layouts/Header';
 import DashboardDisplay from './DashboardDisplay';
 import useFetchUser from './useFetchUser';
 import DeleteUser from '../delete-user/DeleteUser';
+import Avatar from '../avatar/Avatar';
 
 export default function Dashboard() {
     const query = useFetchUser();
@@ -19,6 +20,8 @@ export default function Dashboard() {
                     </Link>
 
                     <DeleteUser />
+
+                    <Avatar />
 
                     <DashboardDisplay query={query} />
                 </main>
