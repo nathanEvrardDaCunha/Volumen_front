@@ -1,5 +1,7 @@
 import z from 'zod';
 
+// Verify it is a enum and not a string ? (same enum as update-avatar-schema.ts)
+
 export const FetchAvatarSchema = z.object({
     avatar_id: z.string().min(5),
 });

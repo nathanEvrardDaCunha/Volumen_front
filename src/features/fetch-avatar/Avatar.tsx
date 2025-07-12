@@ -1,6 +1,6 @@
 import useFetchAvatar from './useFetchAvatar';
 
-export default function Avatar() {
+export default function FetchAvatar() {
     const query = useFetchAvatar();
 
     // Add a fallback image in case server fail or someone tamper with the avatar logic ?
