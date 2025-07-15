@@ -8,6 +8,7 @@ import Dashboard from './features/dashboard/Dashboard';
 import UpdateUser from './features/update-user/UpdateUser';
 import ResetPassword from './features/reset-password/ResetPassword';
 import DisplayBookList from './features/display-book/DisplayBookList';
+import DisplayBookItem from './features/display-book/DisplayBookItem';
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
     {
         path: '/books',
         element: <DisplayBookList />,
+    },
+    {
+        path: '/books/:id',
+        element: <DisplayBookItem />,
     },
     {
         path: '*',

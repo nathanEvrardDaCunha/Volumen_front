@@ -45,7 +45,7 @@ const SaleInfoSchema = z.object({
     buyLink: z.string().optional(),
 });
 
-const BookSchema = z.object({
+export const BookSchema = z.object({
     id: z.string(),
     selfLink: z.string(),
     volumeInfo: VolumeInfoSchema,
