@@ -1,5 +1,4 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import useFetchAvatar from '../useFetchAvatar';
 import {
     UpdateAvatarSchema,
     type UpdateAvatarType,
@@ -7,6 +6,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import useUpdateAvatar from './useUpdateAvatar';
 import UpdateAvatarForm from './UpdateAvatarForm';
+import useFetchAvatar from '../fetch-avatar/useFetchAvatar';
 
 export default function UpdateAvatar() {
     const query = useFetchAvatar();

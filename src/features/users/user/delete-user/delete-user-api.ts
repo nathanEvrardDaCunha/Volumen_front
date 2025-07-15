@@ -1,23 +1,23 @@
 import z from 'zod';
 import {
-    FetchUserResponseSchema,
-    type FetchUserError,
-} from './dashboard-schema';
-import { fetchWithAuth } from '../../utils/auth-fetch';
+    DeleteUserResponseSchema,
+    type DeleteUserError,
+} from './delete-user-schema';
+import { fetchWithAuth } from '../../../../utils/auth-fetch';
 
 // Should I add the Zod Error Handler logic to the other api-features ?
 
-export default async function fetchUserAPI() {
+export default async function deleteUserAPI() {
     try {
         const result = await fetchWithAuth(
             `${import.meta.env.VITE_API_URL}/users/`,
             {
-                method: 'GET',
+                method: 'DELETE',
             }
         );
 
         if (!result.ok) {
-            let errorData: FetchUserError;
+            let errorData: DeleteUserError;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -33,11 +33,11 @@ export default async function fetchUserAPI() {
 
         const jsonResponse = await result.json();
 
-        const validatedData = FetchUserResponseSchema.parse(jsonResponse);
+        const validatedData = DeleteUserResponseSchema.parse(jsonResponse);
         return validatedData;
     } catch (error) {
         if (error instanceof z.ZodError) {
-            const zodError: FetchUserError = {
+            const zodError: DeleteUserError = {
                 name: 'Data Validation Error',
                 cause: 'The data received from the server does not match the expected format.',
                 hint: `Validation details: ${error.errors
@@ -52,9 +52,9 @@ export default async function fetchUserAPI() {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as FetchUserError;
+            throw error as DeleteUserError;
         } else {
-            const networkError: FetchUserError = {
+            const networkError: DeleteUserError = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server or an unexpected error occurred.',
                 hint: 'Try checking your network connection or contact support.',

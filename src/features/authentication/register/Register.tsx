@@ -1,40 +1,41 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import Header from '../../layouts/Header';
-import Footer from '../../layouts/Footer';
-import {
-    ResetPasswordSchema,
-    type ResetPasswordType,
-} from './reset-password-schema';
-import useResetPassword from './useResetPassword';
-import ResetPasswordForm from './ResetPasswordForm';
+import { RegisterFormSchema, type RegisterFormType } from './register-schema';
 
-export default function ResetPassword() {
+import RegisterForm from './RegisterForm';
+import useRegister from './useRegister';
+import Header from '../../../layouts/Header';
+import Footer from '../../../layouts/Footer';
+
+export default function Register() {
     const {
         register,
         handleSubmit,
         setError,
         formState: { errors, isSubmitting },
-    } = useForm<ResetPasswordType>({
+    } = useForm<RegisterFormType>({
         defaultValues: {
+            username: '',
             email: '',
+            password: '',
         },
-        resolver: zodResolver(ResetPasswordSchema),
+        resolver: zodResolver(RegisterFormSchema),
     });
 
-    const mutation = useResetPassword({ setError });
+    const mutation = useRegister({ setError });
 
-    const onSubmit: SubmitHandler<ResetPasswordType> = async (data) => {
+    const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
         mutation.mutate(data);
     };
 
+    // The data validation should be identical to the one on the server.
     return (
         <>
             <Header />
 
             <section>
                 <main>
-                    <ResetPasswordForm
+                    <RegisterForm
                         handleSubmit={handleSubmit}
                         onSubmit={onSubmit}
                         errors={errors}

@@ -1,10 +1,9 @@
 import z from 'zod';
-
-import { fetchWithAuth } from '../../utils/auth-fetch';
 import {
     FetchAvatarResponseSchema,
     type FetchAvatarError,
 } from './fetch-avatar-schema';
+import { fetchWithAuth } from '../../../../utils/auth-fetch';
 
 // Should I add the Zod Error Handler logic to the other api-features ?
 

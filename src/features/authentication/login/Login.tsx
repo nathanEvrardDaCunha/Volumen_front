@@ -1,44 +1,39 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import Footer from '../../layouts/Footer';
-import Header from '../../layouts/Header';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import {
-    UpdateUserFormSchema,
-    type UpdateUserFormType,
-} from './update-user-schema';
-import UpdateUserForm from './UpdateUserForm';
-import useUpdateUser from './useUpdateUser';
+import { LoginFormSchema, type LoginFormType } from './login-schema';
 
-export default function UpdateUser() {
+import LoginForm from './LoginForm';
+import useLogin from './useLogin';
+import Header from '../../../layouts/Header';
+import Footer from '../../../layouts/Footer';
+
+export default function Login() {
     const {
         register,
         handleSubmit,
         setError,
         formState: { errors, isSubmitting },
-    } = useForm<UpdateUserFormType>({
+    } = useForm<LoginFormType>({
         defaultValues: {
-            username: '',
             email: '',
             password: '',
-            bio: '',
         },
-        resolver: zodResolver(UpdateUserFormSchema),
+        resolver: zodResolver(LoginFormSchema),
     });
 
-    const mutation = useUpdateUser({ setError });
+    const mutation = useLogin({ setError });
 
-    const onSubmit: SubmitHandler<UpdateUserFormType> = async (data) => {
+    const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
         mutation.mutate(data);
     };
 
-    // The data validation should be identical to the one on the server.
     return (
         <>
             <Header />
 
             <section>
                 <main>
-                    <UpdateUserForm
+                    <LoginForm
                         handleSubmit={handleSubmit}
                         onSubmit={onSubmit}
                         errors={errors}

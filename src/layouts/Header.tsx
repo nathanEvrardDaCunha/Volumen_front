@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logout from '../features/logout/Logout';
+import Logout from '../features/users/logout/Logout';
 
 export default function Header() {
     const [accessToken, setAccessToken] = useState<string | null>(null);

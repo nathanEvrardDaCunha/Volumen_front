@@ -2,13 +2,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Register from './features/register/Register';
-import Login from './features/login/Login';
-import Dashboard from './features/dashboard/Dashboard';
-import UpdateUser from './features/update-user/UpdateUser';
-import ResetPassword from './features/reset-password/ResetPassword';
-import DisplayBookList from './features/display-book/DisplayBookList';
-import DisplayBookItem from './features/display-book/DisplayBookItem';
+import Login from './features/authentication/login/Login';
+import Register from './features/authentication/register/Register';
+import ResetPassword from './features/authentication/reset-password/ResetPassword';
+import DisplayBookItem from './features/books/display-book/DisplayBookItem';
+import DisplayBookList from './features/books/display-book/DisplayBookList';
+import Dashboard from './features/users/user/dashboard/Dashboard';
+import UpdateUser from './features/users/user/update-user/UpdateUser';
 
 const queryClient = new QueryClient();
 

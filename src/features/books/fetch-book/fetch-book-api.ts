@@ -1,4 +1,4 @@
-import { fetchWithAuth } from '../../utils/auth-fetch';
+import { fetchWithAuth } from '../../../utils/auth-fetch';
 import {
     FetchBookResponseSchema,
     type FetchBookError,
