@@ -9,7 +9,6 @@ export default async function fetchBookAPI(formData: FetchBookFormType) {
     try {
         const url = new URL(`${import.meta.env.VITE_API_URL}/books/`);
         url.searchParams.append('book', formData.query);
-        console.log(url);
 
         const result = await fetchWithAuth(url.toString(), {
             method: 'GET',
