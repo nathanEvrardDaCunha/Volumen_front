@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FetchBookResponseSchema } from '../fetch-book/fetch-book-schema';
 import Header from '../../../layouts/Header';
 import Footer from '../../../layouts/Footer';
+import { FetchBookResponseSchema } from '../fetch-book/fetch-book-schema';
 
 export default function DisplayBookList() {
     const { state } = useLocation();

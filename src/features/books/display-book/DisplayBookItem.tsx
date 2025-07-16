@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { BookSchema } from '../fetch-book/fetch-book-schema';
+import { BookSchema } from '../book-schema';
+import SaveBookButton from '../save-book/SaveBookButton';
 
 export default function DisplayBookItem() {
     const { state } = useLocation();
@@ -172,6 +173,8 @@ export default function DisplayBookItem() {
                         </p>
                     )}
                 </section>
+
+                <SaveBookButton book={book} />
             </article>
         );
     }
