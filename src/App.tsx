@@ -9,6 +9,7 @@ import DisplayBookItem from './features/books/display-book/DisplayBookItem';
 import DisplayBookList from './features/books/display-book/DisplayBookList';
 import Dashboard from './features/users/user/dashboard/Dashboard';
 import UpdateUser from './features/users/user/update-user/UpdateUser';
+import FetchShelves from './features/shelves/fetch-shelves/FetchShelves';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const queryClient = new QueryClient();
 
 // Is it a good idea to regroup the user account personal space under /dashboard
 // => E.g: "/dashboard/home", "/dashboard/books"...
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
     {
         path: '/books/:id',
         element: <DisplayBookItem />,
+    },
+    {
+        path: '/shelves',
+        element: <FetchShelves />,
     },
     {
         path: '*',

@@ -29,6 +29,16 @@ export default function Header() {
             ) : (
                 <ul className="navigation__list">
                     <li>
+                        <Link to={'/dashboard/home'}>
+                            <button type="button">Dashboard</button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={'/shelves'}>
+                            <button type="button">Shelves</button>
+                        </Link>
+                    </li>
+                    <li>
                         <Logout />
                     </li>
                 </ul>
