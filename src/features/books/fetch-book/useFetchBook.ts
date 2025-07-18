@@ -22,7 +22,6 @@ export default function useFetchBook({ setError }: UseFetchBookProps) {
             throw error;
         },
         onSuccess: (result: FetchBookResponse) => {
-            console.log(result.data.books);
             navigate('/books', { state: result });
         },
     });

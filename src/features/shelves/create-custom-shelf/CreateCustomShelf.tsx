@@ -1,7 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import Header from '../../../layouts/Header';
-import Footer from '../../../layouts/Footer';
 import CreateCustomShelfForm from './CreateCustomShelfForm';
 import {
     CreateCustomShelfFormSchema,
@@ -28,23 +26,16 @@ export default function CreateCustomShelf() {
         mutation.mutate(data);
     };
 
+    // Also allow the possibility to change the visibility ?
+    // => Or make it "Private" by default and change it in "update-shelf" ?
+
     return (
-        <>
-            <Header />
-
-            <section>
-                <main>
-                    <CreateCustomShelfForm
-                        handleSubmit={handleSubmit}
-                        onSubmit={onSubmit}
-                        errors={errors}
-                        register={register}
-                        isSubmitting={isSubmitting}
-                    />
-                </main>
-            </section>
-
-            <Footer />
-        </>
+        <CreateCustomShelfForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            register={register}
+            isSubmitting={isSubmitting}
+        />
     );
 }
