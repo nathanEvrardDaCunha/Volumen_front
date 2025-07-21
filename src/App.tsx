@@ -9,7 +9,7 @@ import DisplayBookItem from './features/books/display-book/DisplayBookItem';
 import DisplayBookList from './features/books/display-book/DisplayBookList';
 import Dashboard from './features/users/user/dashboard/Dashboard';
 import UpdateUser from './features/users/user/update-user/UpdateUser';
-import FetchShelves from './features/shelves/fetch-shelves/FetchShelves';
+import FetchBooksOnUserShelves from './features/books-on-shelves/fetch-books-on-shelves/FetchBooksOnUserShelves';
 
 const queryClient = new QueryClient();
 
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/shelves',
-        element: <FetchShelves />,
+        element: <FetchBooksOnUserShelves />,
     },
     {
         path: '*',
