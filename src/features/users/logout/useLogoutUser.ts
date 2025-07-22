@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import type { LogoutUserError } from './logout-schema';
+import type { LogoutUserErrorType } from './logout-schema';
 import logoutUserAPI from './logout-api';
 
 export default function useLogoutUser() {
@@ -9,7 +9,7 @@ export default function useLogoutUser() {
     const mutation = useMutation({
         mutationKey: ['register'],
         mutationFn: logoutUserAPI,
-        onError: (error: LogoutUserError) => {
+        onError: (error: LogoutUserErrorType) => {
             // Replace by a modal ?
             alert(error.cause);
 

@@ -1,7 +1,7 @@
 import { fetchWithAuth } from '../../../../utils/auth-fetch';
 import {
     UpdateAvatarResponseSchema,
-    type UpdateAvatarError,
+    type UpdateAvatarErrorType,
     type UpdateAvatarType,
 } from './update-avatar-schema';
 
@@ -16,7 +16,7 @@ export default async function updateAvatarAPI(formData: UpdateAvatarType) {
         );
 
         if (!result.ok) {
-            let errorData: UpdateAvatarError;
+            let errorData: UpdateAvatarErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -41,9 +41,9 @@ export default async function updateAvatarAPI(formData: UpdateAvatarType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as UpdateAvatarError;
+            throw error as UpdateAvatarErrorType;
         } else {
-            const networkError: UpdateAvatarError = {
+            const networkError: UpdateAvatarErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

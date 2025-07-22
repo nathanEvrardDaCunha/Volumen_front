@@ -1,5 +1,5 @@
 import type { UseQueryResult } from '@tanstack/react-query';
-import type { FetchUserError } from './dashboard-schema';
+import type { FetchUserErrorType } from './dashboard-schema';
 
 interface DashboardDisplayProps {
     query: UseQueryResult<
@@ -16,7 +16,7 @@ interface DashboardDisplayProps {
                 created_at: string;
             };
         },
-        FetchUserError
+        FetchUserErrorType
     >;
 }
 

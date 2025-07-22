@@ -35,7 +35,7 @@ export const UpdateUserResponseSchema = z.object({
     data: z.object({}),
 });
 
-export type UpdateUserError = {
+export type UpdateUserErrorType = {
     name: string;
     cause: string;
     hint: string;

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { UseFormSetError } from 'react-hook-form';
 import updateAvatarAPI from './update-avatar-api';
-import type { UpdateAvatarError } from './update-avatar-schema';
+import type { UpdateAvatarErrorType } from './update-avatar-schema';
 
 interface UseUpdateAvatarProps {
     setError: UseFormSetError<{
@@ -15,7 +15,7 @@ export default function useUpdateAvatar({ setError }: UseUpdateAvatarProps) {
     const mutation = useMutation({
         mutationKey: ['updateAvatar'],
         mutationFn: updateAvatarAPI,
-        onError: (error: UpdateAvatarError) => {
+        onError: (error: UpdateAvatarErrorType) => {
             setError('root', { message: error.cause });
             console.error(`${error.name}: ${error.cause}`);
             throw error;

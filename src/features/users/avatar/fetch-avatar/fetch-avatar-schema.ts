@@ -14,9 +14,9 @@ export const FetchAvatarResponseSchema = z.object({
     data: FetchAvatarSchema,
 });
 
-export type FetchAvatarResponse = z.infer<typeof FetchAvatarResponseSchema>;
+export type FetchAvatarResponseType = z.infer<typeof FetchAvatarResponseSchema>;
 
-export type FetchAvatarError = {
+export type FetchAvatarErrorType = {
     name: string;
     cause: string;
     hint: string;

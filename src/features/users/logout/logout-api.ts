@@ -1,7 +1,7 @@
 import { fetchWithAuth } from '../../../utils/auth-fetch';
 import {
     LogoutUserResponseSchema,
-    type LogoutUserError,
+    type LogoutUserErrorType,
 } from './logout-schema';
 
 export default async function logoutUserAPI() {
@@ -18,7 +18,7 @@ export default async function logoutUserAPI() {
         );
 
         if (!result.ok) {
-            let errorData: LogoutUserError;
+            let errorData: LogoutUserErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -43,9 +43,9 @@ export default async function logoutUserAPI() {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as LogoutUserError;
+            throw error as LogoutUserErrorType;
         } else {
-            const networkError: LogoutUserError = {
+            const networkError: LogoutUserErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

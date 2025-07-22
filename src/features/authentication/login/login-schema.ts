@@ -31,9 +31,9 @@ export const LoginResponseSchema = z.object({
     }),
 });
 
-export type LoginResponse = z.infer<typeof LoginResponseSchema>;
+export type LoginResponseType = z.infer<typeof LoginResponseSchema>;
 
-export type LoginError = {
+export type LoginErrorType = {
     name: string;
     cause: string;
     hint: string;

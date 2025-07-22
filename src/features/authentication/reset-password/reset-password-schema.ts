@@ -14,9 +14,11 @@ export const ResetPasswordResponseSchema = z.object({
     data: z.object({}),
 });
 
-export type ResetPasswordResponse = z.infer<typeof ResetPasswordResponseSchema>;
+export type ResetPasswordResponseType = z.infer<
+    typeof ResetPasswordResponseSchema
+>;
 
-export type ResetPasswordError = {
+export type ResetPasswordErrorType = {
     name: string;
     cause: string;
     hint: string;

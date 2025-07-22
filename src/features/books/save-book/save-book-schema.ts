@@ -1,7 +1,6 @@
 import z from 'zod';
 import { BookSchema } from '../book-schema';
 
-// Add Type Suffix for every type schema to enhance formatting ?
 export const SaveBookSchema = z.object({
     data: BookSchema,
 });

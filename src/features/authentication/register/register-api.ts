@@ -1,6 +1,6 @@
 import {
     RegisterResponseSchema,
-    type RegisterError,
+    type RegisterErrorType,
     type RegisterFormType,
 } from './register-schema';
 
@@ -18,7 +18,7 @@ export default async function registerUserAPI(formData: RegisterFormType) {
         );
 
         if (!result.ok) {
-            let errorData: RegisterError;
+            let errorData: RegisterErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -43,9 +43,9 @@ export default async function registerUserAPI(formData: RegisterFormType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as RegisterError;
+            throw error as RegisterErrorType;
         } else {
-            const networkError: RegisterError = {
+            const networkError: RegisterErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

@@ -1,6 +1,6 @@
 import {
     ResetPasswordResponseSchema,
-    type ResetPasswordError,
+    type ResetPasswordErrorType,
     type ResetPasswordType,
 } from './reset-password-schema';
 
@@ -13,13 +13,13 @@ export default async function resetPasswordAPI(formData: ResetPasswordType) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', //Necessary ?
+                credentials: 'include',
                 body: JSON.stringify(formData),
             }
         );
 
         if (!result.ok) {
-            let errorData: ResetPasswordError;
+            let errorData: ResetPasswordErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -44,9 +44,9 @@ export default async function resetPasswordAPI(formData: ResetPasswordType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as ResetPasswordError;
+            throw error as ResetPasswordErrorType;
         } else {
-            const networkError: ResetPasswordError = {
+            const networkError: ResetPasswordErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

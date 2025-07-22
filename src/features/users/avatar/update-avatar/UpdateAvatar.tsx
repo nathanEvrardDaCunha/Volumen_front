@@ -28,7 +28,6 @@ export default function UpdateAvatar() {
         mutation.mutate(data);
     };
 
-    // The data validation should be identical to the one on the server.
     return (
         <>
             <section>

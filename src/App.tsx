@@ -13,8 +13,6 @@ import FetchBooksOnUserShelves from './features/books-on-shelves/fetch-books-on-
 
 const queryClient = new QueryClient();
 
-// In HEADER, add button to navigate to /login, /register, /logout, /dashboard...
-
 // Protect Dashboard with authentication on the client side too
 
 // Is it a good idea to regroup the user account personal space under /dashboard

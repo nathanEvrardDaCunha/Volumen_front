@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import deleteUserAPI from './delete-user-api';
-import type { DeleteUserError } from './delete-user-schema';
+import type { DeleteUserErrorType } from './delete-user-schema';
 
 export default function useDeleteUser() {
     const navigate = useNavigate();
@@ -9,7 +9,7 @@ export default function useDeleteUser() {
     const mutation = useMutation({
         mutationKey: ['deleteUser'],
         mutationFn: deleteUserAPI,
-        onError: (error: DeleteUserError) => {
+        onError: (error: DeleteUserErrorType) => {
             // Replace by a modal ?
             alert(error.cause);
 

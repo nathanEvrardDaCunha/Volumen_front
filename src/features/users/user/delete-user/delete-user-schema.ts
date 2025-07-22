@@ -16,9 +16,9 @@ export const DeleteUserResponseSchema = z.object({
     data: z.object({}),
 });
 
-export type DeleteUserResponse = z.infer<typeof DeleteUserResponseSchema>;
+export type DeleteUserResponseType = z.infer<typeof DeleteUserResponseSchema>;
 
-export type DeleteUserError = {
+export type DeleteUserErrorType = {
     name: string;
     cause: string;
     hint: string;

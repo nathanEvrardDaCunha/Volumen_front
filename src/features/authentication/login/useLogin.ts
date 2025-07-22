@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import type { LoginError, LoginResponse } from './login-schema';
+import type { LoginErrorType, LoginResponseType } from './login-schema';
 import { useNavigate } from 'react-router-dom';
 import type { UseFormSetError } from 'react-hook-form';
 import loginUserAPI from './login-api';
@@ -17,12 +17,12 @@ export default function useLogin({ setError }: UseLoginProps) {
     const mutation = useMutation({
         mutationKey: ['login'],
         mutationFn: loginUserAPI,
-        onError: (error: LoginError) => {
+        onError: (error: LoginErrorType) => {
             setError('root', { message: error.cause });
             console.error(`${error.name}: ${error.cause}`);
             throw error;
         },
-        onSuccess: (response: LoginResponse) => {
+        onSuccess: (response: LoginResponseType) => {
             if (response && response.data && response.data['accessToken']) {
                 localStorage.setItem(
                     'accessToken',

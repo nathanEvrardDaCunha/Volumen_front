@@ -1,7 +1,7 @@
 import { fetchWithAuth } from '../../../utils/auth-fetch';
 import {
     CreateCustomShelfResponseSchema,
-    type CreateCustomShelfError,
+    type CreateCustomShelfErrorType,
     type CreateCustomShelfFormType,
 } from './create-custom-shelf-schema';
 
@@ -18,7 +18,7 @@ export default async function createCustomShelfAPI(
         );
 
         if (!result.ok) {
-            let errorData: CreateCustomShelfError;
+            let errorData: CreateCustomShelfErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -44,9 +44,9 @@ export default async function createCustomShelfAPI(
             'name' in error &&
             'cause' in error
         ) {
-            throw error as CreateCustomShelfError;
+            throw error as CreateCustomShelfErrorType;
         } else {
-            const networkError: CreateCustomShelfError = {
+            const networkError: CreateCustomShelfErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

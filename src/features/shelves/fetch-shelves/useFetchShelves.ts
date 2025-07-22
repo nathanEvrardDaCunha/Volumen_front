@@ -7,7 +7,7 @@ import fetchShelvesAPI from './fetch-shelves-api';
 
 const FIVE_MINUTES_IN_MILLISECONDS = 5 * 60 * 1000;
 
-export default function useFetchUser() {
+export default function useFetchShelves() {
     const query = useQuery<FetchShelvesResponseType, FetchShelveErrorType>({
         queryKey: ['fetchShelves'],
         queryFn: async () => {

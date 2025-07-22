@@ -1,7 +1,7 @@
 import z from 'zod';
 import {
     DeleteUserResponseSchema,
-    type DeleteUserError,
+    type DeleteUserErrorType,
 } from './delete-user-schema';
 import { fetchWithAuth } from '../../../../utils/auth-fetch';
 
@@ -17,7 +17,7 @@ export default async function deleteUserAPI() {
         );
 
         if (!result.ok) {
-            let errorData: DeleteUserError;
+            let errorData: DeleteUserErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -37,7 +37,7 @@ export default async function deleteUserAPI() {
         return validatedData;
     } catch (error) {
         if (error instanceof z.ZodError) {
-            const zodError: DeleteUserError = {
+            const zodError: DeleteUserErrorType = {
                 name: 'Data Validation Error',
                 cause: 'The data received from the server does not match the expected format.',
                 hint: `Validation details: ${error.errors
@@ -52,9 +52,9 @@ export default async function deleteUserAPI() {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as DeleteUserError;
+            throw error as DeleteUserErrorType;
         } else {
-            const networkError: DeleteUserError = {
+            const networkError: DeleteUserErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server or an unexpected error occurred.',
                 hint: 'Try checking your network connection or contact support.',

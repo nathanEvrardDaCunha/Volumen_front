@@ -50,5 +50,5 @@ export const BookSchema = z.object({
     saleInfo: SaleInfoSchema,
 });
 
-// Replace prefix "Schema" by "Type" everywhere it is necessary
+// Better to duplicate for each one schema or not ?
 export type BookType = z.infer<typeof BookSchema>;

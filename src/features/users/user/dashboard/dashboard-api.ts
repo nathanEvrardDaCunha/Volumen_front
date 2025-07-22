@@ -1,7 +1,7 @@
 import z from 'zod';
 import {
     FetchUserResponseSchema,
-    type FetchUserError,
+    type FetchUserErrorType,
 } from './dashboard-schema';
 import { fetchWithAuth } from '../../../../utils/auth-fetch';
 
@@ -17,7 +17,7 @@ export default async function fetchUserAPI() {
         );
 
         if (!result.ok) {
-            let errorData: FetchUserError;
+            let errorData: FetchUserErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -37,7 +37,7 @@ export default async function fetchUserAPI() {
         return validatedData;
     } catch (error) {
         if (error instanceof z.ZodError) {
-            const zodError: FetchUserError = {
+            const zodError: FetchUserErrorType = {
                 name: 'Data Validation Error',
                 cause: 'The data received from the server does not match the expected format.',
                 hint: `Validation details: ${error.errors
@@ -52,9 +52,9 @@ export default async function fetchUserAPI() {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as FetchUserError;
+            throw error as FetchUserErrorType;
         } else {
-            const networkError: FetchUserError = {
+            const networkError: FetchUserErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server or an unexpected error occurred.',
                 hint: 'Try checking your network connection or contact support.',

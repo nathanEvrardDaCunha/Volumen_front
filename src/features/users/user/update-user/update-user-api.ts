@@ -1,7 +1,7 @@
 import { fetchWithAuth } from '../../../../utils/auth-fetch';
 import {
     UpdateUserResponseSchema,
-    type UpdateUserError,
+    type UpdateUserErrorType,
     type UpdateUserFormType,
 } from './update-user-schema';
 
@@ -16,7 +16,7 @@ export default async function updateUserAPI(formData: UpdateUserFormType) {
         );
 
         if (!result.ok) {
-            let errorData: UpdateUserError;
+            let errorData: UpdateUserErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -41,9 +41,9 @@ export default async function updateUserAPI(formData: UpdateUserFormType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as UpdateUserError;
+            throw error as UpdateUserErrorType;
         } else {
-            const networkError: UpdateUserError = {
+            const networkError: UpdateUserErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

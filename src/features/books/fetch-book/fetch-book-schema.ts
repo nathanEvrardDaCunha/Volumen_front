@@ -1,7 +1,6 @@
 import z from 'zod';
 import { BookSchema } from '../book-schema';
 
-// Add Type Suffix for every type schema to enhance formatting ?
 export const FetchBookFormSchema = z.object({
     query: z.string().min(1),
 });
@@ -16,9 +15,9 @@ export const FetchBookResponseSchema = z.object({
     data: z.object({ books: z.array(BookSchema) }),
 });
 
-export type FetchBookResponse = z.infer<typeof FetchBookResponseSchema>;
+export type FetchBookResponseType = z.infer<typeof FetchBookResponseSchema>;
 
-export type FetchBookError = {
+export type FetchBookErrorType = {
     name: string;
     cause: string;
     hint: string;

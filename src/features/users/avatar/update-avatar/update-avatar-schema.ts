@@ -38,9 +38,11 @@ export const UpdateAvatarResponseSchema = z.object({
     data: z.object({}),
 });
 
-export type UpdateAvatarResponse = z.infer<typeof UpdateAvatarResponseSchema>;
+export type UpdateAvatarResponseType = z.infer<
+    typeof UpdateAvatarResponseSchema
+>;
 
-export type UpdateAvatarError = {
+export type UpdateAvatarErrorType = {
     name: string;
     cause: string;
     hint: string;

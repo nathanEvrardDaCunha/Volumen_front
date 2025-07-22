@@ -8,9 +8,9 @@ export const LogoutUserResponseSchema = z.object({
     data: z.object({ data: z.null() }),
 });
 
-export type LogoutUserResponse = z.infer<typeof LogoutUserResponseSchema>;
+export type LogoutUserResponseType = z.infer<typeof LogoutUserResponseSchema>;
 
-export type LogoutUserError = {
+export type LogoutUserErrorType = {
     name: string;
     cause: string;
     hint: string;

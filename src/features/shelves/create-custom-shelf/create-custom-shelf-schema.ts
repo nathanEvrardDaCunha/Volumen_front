@@ -16,7 +16,7 @@ export const CreateCustomShelfResponseSchema = z.object({
     data: z.object({}),
 });
 
-export type CreateCustomShelfError = {
+export type CreateCustomShelfErrorType = {
     name: string;
     cause: string;
     hint: string;

@@ -1,7 +1,7 @@
 import { fetchWithAuth } from '../../../utils/auth-fetch';
 import {
     FetchBookResponseSchema,
-    type FetchBookError,
+    type FetchBookErrorType,
     type FetchBookFormType,
 } from './fetch-book-schema';
 
@@ -15,7 +15,7 @@ export default async function fetchBookAPI(formData: FetchBookFormType) {
         });
 
         if (!result.ok) {
-            let errorData: FetchBookError;
+            let errorData: FetchBookErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -40,9 +40,9 @@ export default async function fetchBookAPI(formData: FetchBookFormType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as FetchBookError;
+            throw error as FetchBookErrorType;
         } else {
-            const networkError: FetchBookError = {
+            const networkError: FetchBookErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',

@@ -24,6 +24,9 @@ interface FetchBooksOnUserShelvesDisplayProps {
     >;
 }
 
+// Start creating flexible-reusable component without style ?
+// Example: Book Title, Book Authors...
+
 export default function FetchBooksOnUserShelvesDisplay({
     query,
 }: FetchBooksOnUserShelvesDisplayProps) {

@@ -1,7 +1,7 @@
 import z from 'zod';
 import {
     FetchAvatarResponseSchema,
-    type FetchAvatarError,
+    type FetchAvatarErrorType,
 } from './fetch-avatar-schema';
 import { fetchWithAuth } from '../../../../utils/auth-fetch';
 
@@ -17,7 +17,7 @@ export default async function fetchAvatarAPI() {
         );
 
         if (!result.ok) {
-            let errorData: FetchAvatarError;
+            let errorData: FetchAvatarErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -37,7 +37,7 @@ export default async function fetchAvatarAPI() {
         return validatedData;
     } catch (error) {
         if (error instanceof z.ZodError) {
-            const zodError: FetchAvatarError = {
+            const zodError: FetchAvatarErrorType = {
                 name: 'Data Validation Error',
                 cause: 'The data received from the server does not match the expected format.',
                 hint: `Validation details: ${error.errors
@@ -52,9 +52,9 @@ export default async function fetchAvatarAPI() {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as FetchAvatarError;
+            throw error as FetchAvatarErrorType;
         } else {
-            const networkError: FetchAvatarError = {
+            const networkError: FetchAvatarErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server or an unexpected error occurred.',
                 hint: 'Try checking your network connection or contact support.',

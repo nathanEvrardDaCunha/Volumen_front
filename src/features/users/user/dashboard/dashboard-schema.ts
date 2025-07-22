@@ -16,9 +16,9 @@ export const FetchUserResponseSchema = z.object({
     data: FetchUserSchema,
 });
 
-export type FetchUserResponse = z.infer<typeof FetchUserResponseSchema>;
+export type FetchUserResponseType = z.infer<typeof FetchUserResponseSchema>;
 
-export type FetchUserError = {
+export type FetchUserErrorType = {
     name: string;
     cause: string;
     hint: string;

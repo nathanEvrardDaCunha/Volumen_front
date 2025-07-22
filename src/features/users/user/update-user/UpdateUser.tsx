@@ -31,7 +31,6 @@ export default function UpdateUser() {
         mutation.mutate(data);
     };
 
-    // The data validation should be identical to the one on the server.
     return (
         <>
             <Header />

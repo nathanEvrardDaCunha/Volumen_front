@@ -30,7 +30,7 @@ export const RegisterResponseSchema = z.object({
     data: z.object({}),
 });
 
-export type RegisterError = {
+export type RegisterErrorType = {
     name: string;
     cause: string;
     hint: string;

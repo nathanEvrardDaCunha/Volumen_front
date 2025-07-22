@@ -1,6 +1,6 @@
 import {
     LoginResponseSchema,
-    type LoginError,
+    type LoginErrorType,
     type LoginFormType,
 } from './login-schema';
 
@@ -13,13 +13,13 @@ export default async function loginUserAPI(formData: LoginFormType) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', //Necessary ?
+                credentials: 'include',
                 body: JSON.stringify(formData),
             }
         );
 
         if (!result.ok) {
-            let errorData: LoginError;
+            let errorData: LoginErrorType;
             try {
                 errorData = await result.json();
             } catch (parseError) {
@@ -44,9 +44,9 @@ export default async function loginUserAPI(formData: LoginFormType) {
             'name' in error &&
             'cause' in error
         ) {
-            throw error as LoginError;
+            throw error as LoginErrorType;
         } else {
-            const networkError: LoginError = {
+            const networkError: LoginErrorType = {
                 name: 'Network Error',
                 cause: 'Could not connect to the server.',
                 hint: 'Try checking your network connection.',
